@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Understanding JavaScript's Capture</title>
+</head>
+<body class="bod">
+
+  <div class="one">
+    <div class="two">
+      <div class="three">
+      </div>
+    </div>
+  </div>
+
+<style>
+  html {
+    box-sizing: border-box;
+  }
+
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+  div {
+    width: 100%;
+    padding: 100px;
+  }
+
+  .one {
+    background: thistle;
+  }
+
+  .two {
+    background: mistyrose;
+  }
+
+  .three {
+    background: coral;
+  }
+  button {
+    align-items: center;
+    box-sizing: inherit;
+  }
+</style>
+
+<button id="trumpCard">Trump Card! (Click only once)</button>
+
+  <script>
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * Math.floor(max));
+    }
+
+    function showCode(){
+      const randomNum = getRandomInt(10);
+      alert(`Secret Code is:  ${randomNum}`);
+      document.body.style.background = `black`;
+      document.querySelector('.one').style.background = `mistyrose`;
+      document.querySelector('.two').style.background = `coral`;
+      document.querySelector('.three').style.background = `thistle`;
+    }
+
+    document.querySelector('#trumpCard').addEventListener('click', showCode, { once: true});
+
+    function showClassList(e) {
+      console.log(this.classList.value);
+      e.stopPropagation(); // stops from
+    }
+    document.querySelectorAll('div').forEach( div => div.addEventListener('click', showClassList), {capture: false});
+
+  </script>
+</body>
+</html>
